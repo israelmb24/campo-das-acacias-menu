@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campo das Acácias — Menu Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#E05A1C;
+  --orange-light:#F07040;
+  --orange-dim:#8A3510;
+  --dark:#120C06;
+  --dark2:#1C1208;
+  --dark3:#261A0C;
+  --dark4:#321E0E;
+  --cream:#FFF5EC;
+  --cream-dim:#D4B89A;
+  --gold:#C4862A;
+}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--cream);font-family:'DM Sans',sans-serif;min-height:100vh}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--orange-dim)}
+
+/* HERO */
+.hero{position:relative;padding:3rem 1.5rem 2rem;text-align:center;background:linear-gradient(180deg,#1C1208 0%,#120C06 100%);border-bottom:1px solid #2a1a0a}
+.brand-logo{width:80px;height:80px;border-radius:50%;background:var(--dark3);border:2px solid var(--orange-dim);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;overflow:hidden}
+.brand-logo svg{width:60px;height:60px}
+.brand-name{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--cream);letter-spacing:1px;line-height:1.1}
+.brand-sub{font-size:0.8rem;color:var(--orange-light);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.4rem;font-weight:500}
+.brand-desc{font-size:0.85rem;color:var(--cream-dim);margin-top:0.8rem;font-weight:300;line-height:1.6}
+.hero-tags{display:flex;gap:0.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.tag{font-size:0.72rem;padding:0.3rem 0.8rem;border:1px solid var(--orange-dim);border-radius:100px;color:var(--cream-dim);letter-spacing:0.05em}
+
+/* STICKY NAV */
+.cat-nav{position:sticky;top:0;z-index:50;background:var(--dark2);border-bottom:1px solid #2a1a0a;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-nav-inner{display:inline-flex;padding:0 1rem;gap:0}
+.cat-btn{background:none;border:none;color:var(--cream-dim);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;padding:1rem 1.2rem;cursor:pointer;letter-spacing:0.05em;text-transform:uppercase;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap}
+.cat-btn.active{color:var(--orange-light);border-bottom-color:var(--orange)}
+.cat-btn:hover{color:var(--cream)}
+
+/* CONTENT */
+.content{padding:0 0 6rem}
+
+/* SECTION */
+.menu-section{display:none;animation:fadeIn 0.3s ease}
+.menu-section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.section-header{padding:2rem 1.5rem 1.2rem;border-bottom:1px solid #2a1a0a}
+.section-header h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--cream);font-weight:600}
+.section-header p{font-size:0.82rem;color:var(--cream-dim);margin-top:0.3rem;font-style:italic}
+
+/* MENU ITEMS */
+.items-list{padding:0.5rem 0}
+.menu-item{display:flex;justify-content:space-between;align-items:flex-start;padding:1.2rem 1.5rem;border-bottom:1px solid #1e1208;gap:1rem;transition:background 0.15s}
+.menu-item:hover{background:var(--dark3)}
+.menu-item:last-child{border-bottom:none}
+.item-left{flex:1}
+.item-name{font-size:0.95rem;font-weight:500;color:var(--cream);line-height:1.3;display:flex;align-items:center;gap:6px}
+.item-name-en{font-size:0.78rem;color:var(--orange-light);font-style:italic;font-weight:400;display:block;margin-top:2px;font-family:'Playfair Display',serif}
+.item-desc{font-size:0.78rem;color:var(--cream-dim);margin-top:0.3rem;line-height:1.5;font-weight:300}
+.item-right{text-align:right;flex-shrink:0}
+.item-price{font-family:'Playfair Display',serif;font-size:1rem;color:var(--orange-light);font-weight:600;white-space:nowrap}
+.item-unit{font-size:0.7rem;color:var(--cream-dim);margin-top:2px}
+.veg-badge{width:14px;height:14px;border:1.5px solid #22c55e;border-radius:2px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.veg-badge::after{content:'';width:6px;height:6px;background:#22c55e;border-radius:50%}
+
+/* SPECIAL CARD */
+.special-card{margin:1rem 1.5rem;background:var(--dark3);border:1px solid var(--orange-dim);border-radius:12px;overflow:hidden}
+.special-badge{background:var(--orange);color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1rem;display:block;text-align:center}
+.special-item{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;border-bottom:1px solid #2a1a0a;gap:1rem}
+.special-item:last-child{border-bottom:none}
+.special-name{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cream);font-weight:600}
+.special-desc{font-size:0.75rem;color:var(--cream-dim);margin-top:2px}
+.special-price{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);font-weight:700;white-space:nowrap}
+
+/* DIVIDER */
+.cat-divider{padding:0.5rem 1.5rem;background:var(--dark3);font-size:0.7rem;color:var(--orange);letter-spacing:0.2em;text-transform:uppercase;font-weight:500;border-top:1px solid #2a1a0a;border-bottom:1px solid #2a1a0a}
+
+/* BOTTOM CTA */
+.bottom-cta{position:fixed;bottom:0;left:0;right:0;background:var(--dark2);border-top:1px solid #2a1a0a;padding:1rem 1.5rem;display:flex;gap:0.8rem}
+.cta-wa{flex:1;background:var(--orange);color:#fff;border:none;border-radius:8px;padding:0.9rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;letter-spacing:0.03em}
+.cta-wa:hover{background:var(--orange-light)}
+.cta-call{background:var(--dark4);color:var(--cream-dim);border:1px solid #3a2010;border-radius:8px;padding:0.9rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center}
+
+/* PREVIEW BANNER */
+.preview-banner{background:var(--orange);color:#fff;text-align:center;padding:0.6rem 1rem;font-size:0.75rem;font-weight:600;letter-spacing:0.05em;position:sticky;top:0;z-index:100}
+
+/* FOOTER */
+.menu-footer{text-align:center;padding:2rem 1.5rem;border-top:1px solid #2a1a0a}
+.menu-footer p{font-size:0.72rem;color:var(--cream-dim);line-height:1.8;font-weight:300}
+.menu-footer .veg-note{display:flex;align-items:center;justify-content:center;gap:8px;font-size:0.75rem;color:var(--cream-dim);margin-top:0.8rem}
+.made-by{font-size:0.7rem;color:var(--orange-dim);margin-top:1rem;letter-spacing:0.1em}
+</style>
+</head>
+<body>
+
+<div class="preview-banner">🍽️ Menu Digital — Gastronomia diversificada, cocktails exclusivos & vista deslumbrante</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div style="width:90px;height:90px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;border:2px solid var(--orange-light)">
+    <span style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:1px">CdA</span>
+  </div>
+  <div class="brand-name">Campo das Acácias</div>
+  <div class="brand-sub">Maputo, Moçambique</div>
+  <div class="brand-desc">Gastronomia diversificada · Cocktails exclusivos · Vista deslumbrante</div>
+  <div class="hero-tags">
+    <span class="tag">🌅 Av. Patrice Lumumba</span>
+    <span class="tag">🕐 07h–20h diário</span>
+    <span class="tag">💳 Aceita cartão</span>
+  </div>
+</div>
+
+<!-- CATEGORY NAV -->
+<div class="cat-nav">
+  <div class="cat-nav-inner">
+    <button class="cat-btn active" onclick="showCat('entradas')">Entradas</button>
+    <button class="cat-btn" onclick="showCat('pao')">No Pão</button>
+    <button class="cat-btn" onclick="showCat('risotto')">Risotto</button>
+    <button class="cat-btn" onclick="showCat('saladas')">Saladas</button>
+    <button class="cat-btn" onclick="showCat('carnes')">Carnes</button>
+    <button class="cat-btn" onclick="showCat('especiais')">Especiais ⭐</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- ENTRADAS -->
+  <div class="menu-section active" id="cat-entradas">
+    <div class="section-header">
+      <h2>Entradas e Tapas</h2>
+      <p>Tapas and Starters</p>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Carpaccio de carne de caça</div>
+          <span class="item-name-en">Game meat carpaccio</span>
+          <div class="item-desc">Rúcula e frutos secos · Rocket and dry fruit</div>
+        </div>
+        <div class="item-right"><div class="item-price">850 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Tártaro vegetariano <span class="veg-badge"></span></div>
+          <span class="item-name-en">Vegetarian tartare</span>
+          <div class="item-desc">Abacate, tomate cereja, hortelã, cebola roxa, alho francês e rúcula</div>
+        </div>
+        <div class="item-right"><div class="item-price">750 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Tártaro de salmão</div>
+          <span class="item-name-en">Salmon tartare</span>
+          <div class="item-desc">Caviar, manga ou morango, cebola roxa, lima e abacate</div>
+        </div>
+        <div class="item-right"><div class="item-price">950 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Tártaro de Filete de vaca</div>
+          <span class="item-name-en">Beef tartare</span>
+          <div class="item-desc">Alcaparra, cebola roxa, gema de ovo, mostarda e salsa</div>
+        </div>
+        <div class="item-right"><div class="item-price">800 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Tataki de Atum</div>
+          <span class="item-name-en">Tuna Tataki</span>
+          <div class="item-desc">Atum, sésamo, molho de soja, gengibre e fruta</div>
+        </div>
+        <div class="item-right"><div class="item-price">900 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Camarão alhinho</div>
+          <span class="item-name-en">Garlic prawns — Acácias style</span>
+        </div>
+        <div class="item-right"><div class="item-price">650 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Spring rolls de lagostim</div>
+          <span class="item-name-en">Crayfish spring rolls</span>
+        </div>
+        <div class="item-right"><div class="item-price">700 MT</div><div class="item-unit">4 unidades</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Casquinha de caranguejo</div>
+          <span class="item-name-en">Crab Shell</span>
+        </div>
+        <div class="item-right"><div class="item-price">700 MT</div><div class="item-unit">2 unidades</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Três Crostini</div>
+          <div class="item-desc">Camarão e abacate · Presunto e cebola caramelizada · Tomate e mozzarella fresca</div>
+        </div>
+        <div class="item-right"><div class="item-price">650 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Chamuça de labneh <span class="veg-badge"></span></div>
+          <span class="item-name-en">Labneh samoosa</span>
+          <div class="item-desc">Iogurte coalhado, mistura de queijo e azeitonas pretas</div>
+        </div>
+        <div class="item-right"><div class="item-price">650 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Chamuça preta de camarão e mel</div>
+          <span class="item-name-en">Black samoosa with prawns and honey</span>
+        </div>
+        <div class="item-right"><div class="item-price">550 MT</div><div class="item-unit">4 unidades</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Chamuça de caranguejo em apa de caril</div>
+          <span class="item-name-en">Curry samoosa with crab and sweet chilli</span>
+        </div>
+        <div class="item-right"><div class="item-price">600 MT</div><div class="item-unit">4 unidades</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Frito misto do mar</div>
+          <span class="item-name-en">Fried sea mix</span>
+          <div class="item-desc">Camarão, lula e lagostim</div>
+        </div>
+        <div class="item-right"><div class="item-price">1.200 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Camarão panado com guacamole</div>
+          <span class="item-name-en">Breaded shrimp with guacamole</span>
+        </div>
+        <div class="item-right"><div class="item-price">850 MT</div><div class="item-unit">6 unidades</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Bolinhas de carne</div>
+          <span class="item-name-en">Meat balls with truffle mayo</span>
+        </div>
+        <div class="item-right"><div class="item-price">800 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Pica-pau de filete de vaca e pickles</div>
+          <span class="item-name-en">Sauteed fillet steak with pickles</span>
+        </div>
+        <div class="item-right"><div class="item-price">600 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Mini caprese <span class="veg-badge"></span></div>
+          <div class="item-desc">Mozzarella fresca com tomate confiado e manjericão</div>
+        </div>
+        <div class="item-right"><div class="item-price">600 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Cesto Terra <span class="veg-badge"></span></div>
+          <span class="item-name-en">Local basket</span>
+          <div class="item-desc">Chips de mandioca, batata doce e polenta frita</div>
+        </div>
+        <div class="item-right"><div class="item-price">500 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Casca de batata <span class="veg-badge"></span></div>
+          <span class="item-name-en">Potato skin</span>
+          <div class="item-desc">Servido com maionese de lima</div>
+        </div>
+        <div class="item-right"><div class="item-price">400 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Pão de alho</div>
+          <span class="item-name-en">Garlic bread</span>
+          <div class="item-desc">Manteiga, alho, anchova e alcaparra</div>
+        </div>
+        <div class="item-right"><div class="item-price">300 MT</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NO PÃO -->
+  <div class="menu-section" id="cat-pao">
+    <div class="section-header">
+      <h2>No Pão</h2>
+      <p>On Bread</p>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Hamburguer de carne</div>
+          <span class="item-name-en">Beef Burger</span>
+          <div class="item-desc">Carne, queijo, cornichons, cebola caramelizada, molho da casa e alface</div>
+        </div>
+        <div class="item-right"><div class="item-price">800 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Hamburguer de camarão</div>
+          <span class="item-name-en">Shrimp Burger</span>
+          <div class="item-desc">Rúcula, maionese de lima e guacamole</div>
+        </div>
+        <div class="item-right"><div class="item-price">850 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Hamburguer de falafel <span class="veg-badge"></span></div>
+          <span class="item-name-en">Falafel Burger</span>
+          <div class="item-desc">Espinafre e molho de iogurte</div>
+        </div>
+        <div class="item-right"><div class="item-price">750 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Prego no pão</div>
+          <span class="item-name-en">Prego steak roll</span>
+        </div>
+        <div class="item-right"><div class="item-price">600 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Quesadilla de frango</div>
+          <span class="item-name-en">Chicken quesadilla</span>
+          <div class="item-desc">Frango, alface, pimentos assados, molho aioli e queijo</div>
+        </div>
+        <div class="item-right"><div class="item-price">650 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Quesadilla mediterrânea <span class="veg-badge"></span></div>
+          <span class="item-name-en">Mediterranean quesadilla</span>
+          <div class="item-desc">Tomate seco, azeitonas, queijo e paprica</div>
+        </div>
+        <div class="item-right"><div class="item-price">600 MT</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RISOTTO -->
+  <div class="menu-section" id="cat-risotto">
+    <div class="section-header">
+      <h2>Risotto</h2>
+      <p>Tempo de preparação aprox. 20 minutos</p>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Risotto de camarão e abóbora</div>
+          <span class="item-name-en">Butternut squash and prawns risotto</span>
+        </div>
+        <div class="item-right"><div class="item-price">1.300 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Risotto de cordeiro, pinhões e figos</div>
+          <span class="item-name-en">Lamb, pine nuts and figs risotto</span>
+        </div>
+        <div class="item-right"><div class="item-price">1.500 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Risotto de lagostim, prosecco e lima</div>
+          <span class="item-name-en">Crayfish risotto prosecco and lime</span>
+        </div>
+        <div class="item-right"><div class="item-price">1.500 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Risotto de cogumelos <span class="veg-badge"></span></div>
+          <span class="item-name-en">Mushroom risotto</span>
+        </div>
+        <div class="item-right"><div class="item-price">1.000 MT</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SALADAS -->
+  <div class="menu-section" id="cat-saladas">
+    <div class="section-header">
+      <h2>Saladas</h2>
+      <p>Salads</p>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Salada de lagostim</div>
+          <span class="item-name-en">Crayfish salad</span>
+          <div class="item-desc">Lagostim, batata, cebola roxa, aipo, salsa e caviar</div>
+        </div>
+        <div class="item-right"><div class="item-price">900 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Salada de caranguejo</div>
+          <span class="item-name-en">Crab salad</span>
+          <div class="item-desc">Miolo de caranguejo, caviar e lima</div>
+        </div>
+        <div class="item-right"><div class="item-price">950 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Salada tropical de camarão e fruta</div>
+          <span class="item-name-en">Tropical salad with prawns and seasonal fruit</span>
+        </div>
+        <div class="item-right"><div class="item-price">850 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Salada César</div>
+          <span class="item-name-en">Caesar salad</span>
+          <div class="item-desc">Alface, peito de frango grelhado, croutons, anchovas e molho césar</div>
+        </div>
+        <div class="item-right"><div class="item-price">850 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Salada de quinoa e salmão fumado</div>
+          <span class="item-name-en">Quinoa and smoked salmon salad</span>
+          <div class="item-desc">Espinafre, cebola roxa, tomate cereja e molho de iogurte</div>
+        </div>
+        <div class="item-right"><div class="item-price">900 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Salada de quinoa e abacate <span class="veg-badge"></span></div>
+          <span class="item-name-en">Quinoa and avocato salad</span>
+        </div>
+        <div class="item-right"><div class="item-price">900 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Salada de beterraba e batata doce com nozes <span class="veg-badge"></span></div>
+          <span class="item-name-en">Beetroot and roasted sweet potatoes with nuts</span>
+        </div>
+        <div class="item-right"><div class="item-price">780 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Salada Fresca <span class="veg-badge"></span></div>
+          <span class="item-name-en">Fresh Salad</span>
+          <div class="item-desc">Alface, cebola roxa, tomate cereja, cenoura, pepino e azeitonas</div>
+        </div>
+        <div class="item-right"><div class="item-price">600 MT</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARNES -->
+  <div class="menu-section" id="cat-carnes">
+    <div class="section-header">
+      <h2>Carnes</h2>
+      <p>Meats</p>
+    </div>
+    <div class="items-list">
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Filete de vaca com folha de ouro</div>
+          <span class="item-name-en">Beef fillet with gold leaf and wedge potatoes</span>
+        </div>
+        <div class="item-right"><div class="item-price">1.800 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Picanha 300g</div>
+          <span class="item-name-en">Grilled rump steak</span>
+          <div class="item-desc">Arroz, feijão preto, farofa, couve mineira e banana</div>
+        </div>
+        <div class="item-right"><div class="item-price">1.500 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Magret de pato com laranja e figos</div>
+          <span class="item-name-en">Duck magret with orange and figs</span>
+        </div>
+        <div class="item-right"><div class="item-price">1.500 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Costelas de cordeiro grelhadas</div>
+          <span class="item-name-en">Grilled lamb chops with roman marinade</span>
+        </div>
+        <div class="item-right"><div class="item-price">1.300 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Entrecosto de porco</div>
+          <span class="item-name-en">Pork spare ribs</span>
+          <div class="item-desc">Puré de maçã e molho de mostarda e mel</div>
+        </div>
+        <div class="item-right"><div class="item-price">1.200 MT</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Peito de frango grelhado</div>
+          <span class="item-name-en">Grilled chicken breast</span>
+          <div class="item-desc">Molho de caril e côco</div>
+        </div>
+        <div class="item-right"><div class="item-price">1.000 MT</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESPECIAIS -->
+  <div class="menu-section" id="cat-especiais">
+    <div class="section-header">
+      <h2>Especiais do Acácias</h2>
+      <p>Signature dishes — as nossas estrelas</p>
+    </div>
+
+    <div class="special-card">
+      <span class="special-badge">⭐ Signature — Especiais da Casa</span>
+      <div class="special-item">
+        <div>
+          <div class="special-name">T-Bone à Fiorentina 1200g</div>
+          <div class="special-desc">Para 2–3 pessoas · For 2–3 persons</div>
+        </div>
+        <div class="special-price">3.000 MT</div>
+      </div>
+      <div class="special-item">
+        <div>
+          <div class="special-name">T-Bone à Fiorentina 800g</div>
+          <div class="special-desc">Para 1–2 pessoas · For 1–2 persons</div>
+        </div>
+        <div class="special-price">2.300 MT</div>
+      </div>
+      <div class="special-item">
+        <div>
+          <div class="special-name">Tomahawk flambeado com conhaque 400g</div>
+          <div class="special-desc">Natural tomahawk steak flamed with brandy</div>
+        </div>
+        <div class="special-price">1.500 MT</div>
+      </div>
+      <div class="special-item">
+        <div>
+          <div class="special-name">Tomahawk 400g</div>
+          <div class="special-desc">Natural tomahawk steak</div>
+        </div>
+        <div class="special-price">1.400 MT</div>
+      </div>
+      <div class="special-item">
+        <div>
+          <div class="special-name">Maminha 300g</div>
+          <div class="special-desc">Corte argentino · Argentine cut</div>
+        </div>
+        <div class="special-price">1.200 MT</div>
+      </div>
+    </div>
+
+    <div class="menu-footer">
+      <p>🌅 Vista para a Baía de Maputo<br>Ambiente ideal para jantares românticos, reuniões e celebrações</p>
+      <div class="veg-note"><span class="veg-badge"></span> Opção vegetariana</div>
+      <div class="made-by">Menu digital criado por I MB Digital Agency · Maputo</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM CTA -->
+<div class="bottom-cta">
+  <a href="https://wa.me/258848877665?text=Olá!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Campo%20das%20Acácias." class="cta-wa">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Reservar Mesa
+  </a>
+  <a href="tel:+258848877665" class="cta-call">📞</a>
+</div>
+
+<script>
+function showCat(id){
+  document.querySelectorAll('.menu-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('cat-'+id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top:document.querySelector('.cat-nav').offsetTop-1,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
